@@ -1,0 +1,9 @@
+{
+  "name": "problem-1",
+  "module": "index.ts",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "private": true,
+  "type": "module"
+}
