@@ -5,6 +5,7 @@ import { LocaleProvider } from "src/contexts/locale-context";
 import { SelectedTokensProvider } from "src/contexts/selected-tokens-context";
 import { TokenPriceProvider } from "src/contexts/token-price-context";
 import { fetchAvailableIcons, fetchTokenPrices } from "src/lib/api-server";
+import { UseUseCallbackToMemo } from "src/useCallbackToMemo";
 
 export default async function Home() {
 	"use cache";
@@ -15,6 +16,8 @@ export default async function Home() {
 		fetchAvailableIcons(),
 	]);
 	const fetchedAt = new Date().toISOString();
+
+	return <UseUseCallbackToMemo />;
 
 	return (
 		<div className="flex min-h-screen items-center justify-center bg-linear-to-br from-background to-muted p-4">
