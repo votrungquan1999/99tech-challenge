@@ -1,22 +1,28 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 
+// for demonstration purpose only, this does not make the code run more efficiently like useMemo, it just demonstrates that useCallback can be used to memoize a value when the value changes but the dependencies do not change
 export function UseUseCallbackToMemo() {
 	const [count, setCount] = useState(0);
 	const [callBackCount, setCallBackCount] = useState(0);
 
-	// have to use this to avoid hydration mismatch
-	const [randomValue, setRandomValue] = useState(0);
+	const [loading, setLoading] = useState(true);
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: this is sematically wrong, but for demonstration purpose
-	useEffect(() => {
-		setRandomValue(Math.random());
-	}, [count, callBackCount]);
+	const randomValue = Math.random();
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: this is sematically wrong, but for demonstration purpose
 	const memoizedFn = useCallback(() => {
 		return randomValue;
 	}, [callBackCount]);
+
+	// avoid hydration mismatch while still use Math.random() for demonstration purpose
+	useEffect(() => {
+		setLoading(false);
+	}, []);
+
+	if (loading) {
+		return <div>Loading...</div>;
+	}
 
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 p-8">

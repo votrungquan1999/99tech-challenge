@@ -2,7 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
 	/* config options here */
-	reactCompiler: true,
+	// disable this demonstrates the use of Math.random() in a component, otherwise, it will automatically transformed in to useMemo
+	reactCompiler: false,
 
 	turbopack: {
 		root: __dirname,
